@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+import calc 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hweight.db'
@@ -14,19 +15,19 @@ class Post(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-      # posts = Post.query.all() グラフを表示
-      return render_template('index.html', posts=posts)
+        # posts = Post.query.all() グラフを表示
+        return render_template('index.html')
 
-    else:
-      name = request.from.get('name')
-      height = request.from.get('height')
-      weight = request.from.get('weight')
+    # else:
+    #   name = request.from.get('name')
+    #   height = request.from.get('height')
+    #   weight = request.from.get('weight')
 
-      new_post = Post(name=name, height=height, weight=weight)
+    #   new_post = Post(name=name, height=height, weight=weight)
 
-      db.session.add(new_post)
-      db.session.commit()
-      return redirect('/')
+    #   db.session.add(new_post)
+    #   db.session.commit()
+    #   return redirect('/')
 
 @app.route('/create')
 def create():
